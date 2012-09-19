@@ -1,0 +1,32 @@
+<head>
+<title>userid</title>
+</head>
+
+<body>
+{{> loginButtons}}  
+{{> hello}}
+
+</body>
+
+<template name="hello">
+  <h1>My Contrived World!</h1>
+  {{greeting}}
+
+  <ol>
+      <li>Create a account by Clicking Signin and Create account</li>
+      <li>Note the list of items below now appears</li>
+      <li>Click 'DeleteMe' this calls `Meteor.call('deleteMe')` on the server which then calls `Meteor.users.remove({_id:this.userId();})`</li>
+      <li>Now the user has been deleted but not logged out and the restrict list of items are still visible</li>
+      <li>You can even refresh the page and still see the restricted content</li>
+  </ol>
+
+  {{#if currentUser}}
+  <input type="button" value="Delete Me" />
+  {{/if}}
+  <p>Below will be a list of items limited if the userId is set on the server</p>
+  <ul>
+      {{#each loginitems}}
+      <li>{{name}}</li>
+      {{/each}}
+  </ul>
+</template>
